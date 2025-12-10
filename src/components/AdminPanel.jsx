@@ -113,7 +113,8 @@ export default function AdminPanel({ onClose = null }) {
           </div>
         </div>
 
-        <table className="admin-table">
+        <div className="admin-table-wrap">
+          <table className="admin-table">
           <thead>
             <tr>
               <th>Клиент</th>
@@ -145,7 +146,8 @@ export default function AdminPanel({ onClose = null }) {
               </tr>
             ))}
           </tbody>
-        </table>
+          </table>
+        </div>
       </div>
     </div>
   );

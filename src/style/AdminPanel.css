@@ -94,3 +94,21 @@
   z-index: 1400;
 }
 
+/* table wrapper: allow horizontal scroll on small screens */
+.admin-table-wrap { overflow:auto; }
+
+@media (max-width: 768px) {
+  .admin-card { width: 95%; padding: 14px; }
+  .admin-header { flex-direction: column; align-items: flex-start; gap:8px }
+  .admin-table { width: 100%; border: none; }
+  .admin-table thead { display: none; }
+  .admin-table tbody tr { display: block; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); margin-bottom: 12px; padding: 12px; border-radius: 10px; }
+  .admin-table tbody tr td { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: none; }
+  .admin-table tbody tr td:first-child { font-weight:800; }
+  .admin-badge { padding:4px 8px; font-size:13px }
+  .btn { padding:8px 10px; font-size:14px }
+  .admin-auth-card { width: 92%; padding: 18px }
+  .admin-auth-form { flex-direction: column }
+  .admin-auth-btn { width:100% }
+}
+
