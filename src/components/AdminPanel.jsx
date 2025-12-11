@@ -131,7 +131,12 @@ export default function AdminPanel({ onClose = null }) {
                 <td>{a.name}</td>
                 <td>{a.phone}</td>
                 <td>{a.direction}</td>
-                <td>{new Date(a.createdAt).toLocaleString()}</td>
+                <td>{(() => {
+                  const raw = a.createdAt || a.created_at || a.createdAtISO || a.created_at_iso;
+                  if (!raw) return '-';
+                  const d = new Date(raw);
+                  return Number.isNaN(d.getTime()) ? '-' : d.toLocaleString();
+                })()}</td>
                 <td>
                   <span className={`admin-badge status-${a.status}`}>{STATUS_LABELS[a.status] || a.status}</span>
                 </td>
