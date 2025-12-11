@@ -435,6 +435,57 @@ body {
   .coaches-carousel__nav { width: 50px; height: 50px; }
 }
 
+/* Mobile: simplify layout to a centered column for better appearance on small screens */
+@media (max-width: 768px) {
+  .coaches-carousel {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 24px 0 40px;
+  }
+
+  .coaches-carousel__wrapper {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: auto !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    opacity: 1 !important;
+  }
+
+  .coaches-carousel__item {
+    width: 220px !important;
+    height: 220px !important;
+    border-radius: 50%;
+    border-width: 5px;
+    box-shadow: 0 0 40px rgba(255,255,255,0.6), 0 0 80px rgba(255,255,255,0.3);
+  }
+
+  .coaches-carousel__wrapper.center .coaches-carousel__item {
+    transform: none !important;
+    scale: 1 !important;
+    z-index: 10;
+  }
+
+  .coaches-carousel__name { font-size: 18px; margin-top: 12px; }
+
+  .coaches-carousel__nav {
+    position: fixed;
+    bottom: 18px;
+    width: 48px;
+    height: 48px;
+    opacity: 0.95;
+  }
+  .coaches-carousel__nav--prev { left: 14px; }
+  .coaches-carousel__nav--next { right: 14px; }
+}
+
 @media (max-width: 480px) {
   .coaches-carousel { height: 420px; }
   .coaches-carousel__wrapper,
