@@ -15,6 +15,18 @@
   background-clip: padding-box, border-box;
   box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
+.admin-card-close {
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 6px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+}
 .admin-header { display:flex; align-items:center; justify-content:space-between; gap:12px }
 .admin-table { width:100%; border-collapse:collapse; margin-top:16px }
 .admin-table th, .admin-table td { padding:12px; border-bottom:1px solid rgba(255,255,255,0.06); text-align:left }

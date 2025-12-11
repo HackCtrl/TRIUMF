@@ -100,6 +100,7 @@ export default function AdminPanel({ onClose = null }) {
   const content = (
     <div className="admin-root">
       <div className="admin-card">
+        {onClose && <button className="admin-card-close" onClick={onClose} aria-label="Закрыть">✕</button>}
         <div className="admin-header">
           <div>
             <h2 style={{margin:0}}>Админ-панель</h2>
@@ -109,6 +110,15 @@ export default function AdminPanel({ onClose = null }) {
             <div style={{textAlign:'right'}}>Всего: <strong>{apps.length}</strong></div>
             <div style={{marginTop:8}}>
               <button className="btn" onClick={fetchApps} disabled={loading}>Обновить</button>
+              <button className="btn" style={{marginLeft:8, background:'#c0392b', borderColor:'#a02822'}} onClick={async () => {
+                if (!confirm('Очистить все заявки? Это удалит все записи навсегда.')) return;
+                try {
+                  setLoading(true);
+                  await apiFetch('/api/applications', { method: 'DELETE', headers: { 'x-admin-pass': pass } });
+                  await fetchApps();
+                } catch (err) { console.error(err); alert('Ошибка удаления всех заявок'); }
+                finally { setLoading(false); }
+              }}>Очистить все</button>
             </div>
           </div>
         </div>
@@ -118,6 +128,7 @@ export default function AdminPanel({ onClose = null }) {
           <thead>
             <tr>
               <th>Клиент</th>
+              <th>Telegram</th>
               <th>Телефон</th>
               <th>Направление</th>
               <th>Дата</th>
@@ -129,6 +140,7 @@ export default function AdminPanel({ onClose = null }) {
             {apps.map((a) => (
               <tr key={a.id}>
                 <td>{a.name}</td>
+                <td>{a.username || '-'}</td>
                 <td>{a.phone}</td>
                 <td>{a.direction}</td>
                 <td>{(() => {
@@ -147,6 +159,13 @@ export default function AdminPanel({ onClose = null }) {
                   {a.status !== 'closed' && (
                     <button className="btn" style={{marginLeft:8}} onClick={() => updateStatus(a.id, 'closed')}>Закрыть</button>
                   )}
+                  <button className="btn" style={{marginLeft:8, background:'#a02822', borderColor:'#7f2019'}} onClick={async () => {
+                    if (!confirm('Удалить эту заявку?')) return;
+                    try {
+                      await apiFetch(`/api/applications/${a.id}`, { method: 'DELETE', headers: { 'x-admin-pass': pass } });
+                      setApps((prev) => prev.filter((p) => p.id !== a.id));
+                    } catch (err) { console.error(err); alert('Ошибка удаления'); }
+                  }}>Удалить</button>
                 </td>
               </tr>
             ))}

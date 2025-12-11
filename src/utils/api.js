@@ -61,6 +61,7 @@ export default async function apiFetch(path, opts = {}) {
       const entry = {
         id: Date.now().toString(),
         name: body.name || '',
+        username: body.username || '',
         phone: body.phone || '',
         direction: body.direction || '',
         status: 'new',
@@ -88,6 +89,23 @@ export default async function apiFetch(path, opts = {}) {
       db[idx] = { ...db[idx], ...body };
       writeLocal(db);
       return db[idx];
+    }
+
+    // DELETE /api/applications -> clear all local entries
+    if (path.endsWith('/api/applications') && method === 'DELETE') {
+      const db = [];
+      writeLocal(db);
+      return { deleted: true };
+    }
+
+    // DELETE /api/applications/:id -> delete single local entry
+    if (path.match(/\/api\/applications\/[^\/]+$/) && method === 'DELETE') {
+      const id = path.split('/').pop();
+      let db = readLocal();
+      const before = db.length;
+      db = db.filter((x) => x.id !== id);
+      writeLocal(db);
+      return { deleted: db.length < before };
     }
 
     // otherwise rethrow the original error

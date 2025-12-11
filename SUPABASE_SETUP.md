@@ -10,6 +10,12 @@
 6. Выберите регион (Европа рекомендуется для РФ)
 7. Создайте проект (ждите 2-3 минуты)
 
+Если вы уже создали таблицу `applications` ранее без `created_at`, выполните этот SQL для добавления:
+
+```sql
+alter table public.applications
+  add column if not exists created_at timestamptz default now();
+```
 ## Шаг 2: Создать таблицу через SQL
 
 1. В Supabase Dashboard откройте **SQL Editor** (слева в меню)

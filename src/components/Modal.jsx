@@ -11,6 +11,7 @@ export default function Modal({ isOpen, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const name = e.target.name.value.trim();
+    const username = e.target.username?.value.trim() || '';
     const phone = e.target.phone.value.trim();
     const direction = e.target.direction.value || '';
 
@@ -21,7 +22,7 @@ export default function Modal({ isOpen, onClose }) {
       await apiFetch('/api/applications', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, phone, direction }),
+        body: JSON.stringify({ name, username, phone, direction }),
       });
 
       alert(`Спасибо, ${name}! Ваша заявка принята.`);
@@ -60,6 +61,13 @@ export default function Modal({ isOpen, onClose }) {
             placeholder="+7 (999) 999-99-99"
             required
             pattern="^\+?[0-9\s\-\(\)]{10,20}$"
+            className="modal-input"
+          />
+
+          <input
+            type="text"
+            name="username"
+            placeholder="Telegram username (без @)"
             className="modal-input"
           />
 
