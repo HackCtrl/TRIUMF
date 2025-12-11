@@ -444,6 +444,7 @@ body {
     align-items: center;
     gap: 12px;
     padding: 24px 0 40px;
+    position: relative;
   }
 
   .coaches-carousel__wrapper {
@@ -461,10 +462,20 @@ body {
 
   .coaches-carousel__item {
     width: 220px !important;
-    height: 220px !important;
+    aspect-ratio: 1 / 1;
+    height: auto !important;
     border-radius: 50%;
     border-width: 5px;
     box-shadow: 0 0 40px rgba(255,255,255,0.6), 0 0 80px rgba(255,255,255,0.3);
+    overflow: hidden;
+  }
+
+  .coaches-carousel__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 50%;
   }
 
   .coaches-carousel__wrapper.center .coaches-carousel__item {
@@ -476,14 +487,17 @@ body {
   .coaches-carousel__name { font-size: 18px; margin-top: 12px; }
 
   .coaches-carousel__nav {
-    position: fixed;
-    bottom: 18px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     width: 48px;
     height: 48px;
     opacity: 0.95;
+    background: rgba(0,0,0,0.45);
+    border: 1px solid rgba(255,255,255,0.06);
   }
-  .coaches-carousel__nav--prev { left: 14px; }
-  .coaches-carousel__nav--next { right: 14px; }
+  .coaches-carousel__nav--prev { left: 8px; }
+  .coaches-carousel__nav--next { right: 8px; }
 }
 
 @media (max-width: 480px) {
