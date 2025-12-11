@@ -317,6 +317,7 @@ body {
   box-shadow: 0 0 40px rgba(255,255,255,0.6), 0 0 80px rgba(255,255,255,0.3);
   pointer-events: none;
   margin-bottom: 16px;
+  background: #000;
 }
 
 .coaches-carousel__photo {
@@ -324,7 +325,14 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
-  object-position: center center;
+  object-position: center 30%;
+}
+
+/* Smooth scaling control so mobile images can be slightly shrunk inside the circle
+   to avoid cropping faces while keeping the circular frame filled. */
+.coaches-carousel__photo {
+  transform-origin: center top;
+  transition: transform 240ms ease, object-position 240ms ease;
 }
 
 
@@ -425,11 +433,11 @@ body {
 }
 
 @media (max-width: 768px) {
-  .coaches-carousel { height: 560px; }
+  .coaches-carousel { height: 520px; }
   .coaches-carousel__wrapper,
   .coaches-carousel__item {
-    width: min(320px, 78vw);
-    height: min(320px, 78vw);
+    width: min(300px, 72vw);
+    height: min(300px, 72vw);
     border-radius: 50%;
   }
   .coaches-carousel__wrapper.center .coaches-carousel__item { transform: scale(1.25); }
@@ -438,32 +446,38 @@ body {
   .coaches-carousel__nav--prev { left: calc(50% - (min(320px, 78vw) + 28px)); }
   .coaches-carousel__nav--next { right: calc(50% - (min(320px, 78vw) + 28px)); }
   .coaches-carousel__nav { width: 56px; height: 56px; }
+  .coaches-carousel__photo { transform: scale(0.92); }
+  .coaches-carousel__wrapper.center .coaches-carousel__photo { transform: scale(1); }
 }
 
 @media (max-width: 480px) {
-  .coaches-carousel { height: 520px; }
+  .coaches-carousel { height: 480px; }
   .coaches-carousel__wrapper,
   .coaches-carousel__item {
-    width: min(280px, 86vw);
-    height: min(280px, 86vw);
+    width: min(240px, 82vw);
+    height: min(240px, 82vw);
     border-radius: 50%;
   }
   .coaches-carousel__wrapper.center .coaches-carousel__item { transform: scale(1.25); }
   .coaches-carousel__nav--prev { left: 16px; }
   .coaches-carousel__nav--next { right: 16px; }
+  .coaches-carousel__photo { transform: scale(0.9); }
+  .coaches-carousel__wrapper.center .coaches-carousel__photo { transform: scale(1); }
 }
 
 @media (max-width: 360px) {
-  .coaches-carousel { height: 500px; }
+  .coaches-carousel { height: 460px; }
   .coaches-carousel__wrapper,
   .coaches-carousel__item {
-    width: min(240px, 90vw);
-    height: min(240px, 90vw);
+    width: min(200px, 88vw);
+    height: min(200px, 88vw);
     border-radius: 50%;
   }
   .coaches-carousel__nav--prev { left: 12px; }
   .coaches-carousel__nav--next { right: 12px; }
   .coaches-carousel__nav { width: 54px; height: 54px; }
+  .coaches-carousel__photo { transform: scale(0.88); }
+  .coaches-carousel__wrapper.center .coaches-carousel__photo { transform: scale(1); }
 }
 
 @media only screen 
