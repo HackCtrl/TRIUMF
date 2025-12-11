@@ -1,4 +1,6 @@
-const API_BASE = import.meta.env.VITE_API_BASE || (`http://${location.hostname}:3001`);
+// On Vercel: requests to /api/* are handled by serverless functions (api/ folder)
+// Locally: requests to /api/* fall back to localStorage if no local server
+const API_BASE = '';
 const LOCAL_KEY = 'boxing_club_applications_v1';
 
 function readLocal() {
