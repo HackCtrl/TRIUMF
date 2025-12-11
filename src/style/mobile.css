@@ -1,0 +1,195 @@
+/* Mobile override stylesheet - only affect screens <= 768px */
+:root {
+  --mobile-font-size: 15px;
+  --mobile-gap: 18px;
+  --mobile-section-padding: 16px;
+}
+
+/* Base adjustments */
+@media (max-width: 768px) {
+  html, body {
+    font-size: var(--mobile-font-size);
+  }
+  body {
+    padding: 0;
+    overscroll-behavior-y: contain;
+    overflow-x: hidden; /* prevent horizontal scroll on mobile */
+  }
+
+  /* fixed header height for mobile to avoid content hiding under header */
+  :root { --mobile-header-height: 72px; }
+  header { height: var(--mobile-header-height); }
+  /* reserve top space so content isn't hidden behind fixed header */
+  main, .hero__content { padding-top: calc(var(--mobile-header-height) + 8px); }
+
+  .coaches, .directions, .prices, .schedule {
+    padding-left: var(--mobile-section-padding);
+    padding-right: var(--mobile-section-padding);
+  }
+
+  /* Hero: tighter paddings and larger readable text */
+  .hero__content {
+    padding: 110px 16px 60px;
+    max-width: 100%;
+    padding-left: var(--mobile-section-padding);
+    padding-right: var(--mobile-section-padding);
+  }
+  .hero__title { font-size: 34px; line-height: 1.08; }
+  .hero__subtitle { font-size: 18px; }
+
+  /* Cards and containers should use full width */
+  .card, .prices__card {
+    margin: 0 auto;
+    width: 100% !important;
+    max-width: 420px;
+  }
+
+  /* Buttons full width where appropriate */
+  .button, .admin-auth-btn {
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  /* Ensure no horizontal scroll from fixed header */
+  header { left: 0; right: 0; width: 100%; }
+
+  /* Modal and admin: center and full-width */
+  .admin-modal-overlay, .admin-auth-overlay, .mobile-menu, .admin-auth-card {
+    box-sizing: border-box;
+  }
+
+  /* Admin modal: full-width card near top of screen on mobile */
+  .admin-modal-overlay {
+    align-items: flex-start !important;
+    padding-top: 18px !important;
+  }
+  .admin-modal-overlay .admin-card,
+  .admin-modal-overlay .admin-auth-card {
+    width: calc(100% - 28px) !important;
+    max-width: none !important;
+    margin: 0 auto !important;
+    border-radius: 12px !important;
+  }
+
+  /* Reduce large shadows to avoid heavy visuals on mobile */
+  .card, .admin-card, .dev-toast { box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
+  /* Improve readability for tables converted to cards */
+  .admin-table-wrap { padding-bottom: 12px; }
+
+  /* Fine tune coaches carousel (in addition to existing overrides) */
+  .coaches-carousel { height: auto; padding-top: 40px; padding-bottom: 40px; }
+}
+
+/* Further narrow devices */
+@media (max-width: 420px) {
+  .hero__title { font-size: 30px; }
+  .hero__subtitle { font-size: 16px; }
+}
+
+/* ========== Strong mobile overrides (applied only <=768px) ========== */
+@media (max-width: 768px) {
+  /* Ensure root sizing */
+  html, body { font-size: 15px !important; }
+
+  /* Header: fixed, compact, and visible */
+  header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: 64px !important;
+    padding: 8px 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.6) !important;
+    z-index: 2000 !important;
+    background: linear-gradient(#000, #000) !important;
+  }
+  header .logo img { height: 42px !important; }
+  .burger { display: flex !important; }
+  .desktop-nav, .desktop-button { display: none !important; }
+
+  /* Reserve content space below header */
+  main, .hero__content, .coaches, .directions { padding-top: 80px !important; }
+
+  /* Mobile menu full-screen tweaks */
+  .mobile-menu { padding-top: 72px !important; }
+
+  /* Hero: compact spacing and readable text */
+  .hero__content { padding: 90px 14px 40px !important; }
+  .hero__title { font-size: 32px !important; line-height: 1.05 !important; }
+  .hero__subtitle { font-size: 16px !important; }
+
+  /* Make main containers full width and remove big gaps */
+  .coaches, .directions, .prices, .schedule {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* Cards: occupy available width and reduce radius/shadows */
+  .card, .prices__card, .admin-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5) !important;
+  }
+
+  /* Buttons and inputs full width for easy tapping */
+  .button, .btn, .admin-auth-btn, input, textarea, select {
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Coaches: ensure circular avatars and center them */
+  .coaches-carousel__wrapper, .coaches-carousel__item {
+    width: min(260px, 78vw) !important;
+    height: min(260px, 78vw) !important;
+    aspect-ratio: 1 / 1 !important;
+    border-radius: 50% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+  .coaches-carousel__photo { object-position: center 30% !important; }
+
+  /* Admin panel: modal and panel full-width near top */
+  .admin-modal-overlay, .admin-auth-overlay {
+    align-items: flex-start !important;
+    padding-top: 12px !important;
+  }
+  .admin-card, .admin-auth-card {
+    width: calc(100% - 24px) !important;
+    max-width: none !important;
+    margin: 6px auto !important;
+    padding: 12px !important;
+    border-radius: 12px !important;
+  }
+  .admin-table-wrap { overflow: visible !important; }
+  .admin-table tbody tr td { flex-direction: column !important; align-items: flex-start !important; }
+
+  /* Prevent horizontal scroll and remove oversize elements */
+  body, html { overflow-x: hidden !important; }
+  .gradient-line { width: calc(100% - 32px) !important; }
+
+  /* Reduce heavy visual effects */
+  .box-shadow, .card, .admin-card { box-shadow: none !important; }
+
+  /* Forms and modal spacing */
+  .admin-auth-card { padding: 16px !important; }
+
+  /* Small device font sizing adjustments */
+  .coaches-carousel__name { font-size: 18px !important; }
+}
+
+/* Extra-narrow phones */
+@media (max-width: 360px) {
+  header { height: 60px !important; }
+  main, .hero__content { padding-top: 72px !important; }
+  .coaches-carousel__wrapper, .coaches-carousel__item { width: min(200px, 82vw) !important; height: min(200px, 82vw) !important; }
+}
+
+/* End strong overrides */

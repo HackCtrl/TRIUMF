@@ -4,6 +4,7 @@ import './style/style.css'
 import './style/header.css'
 import './style/Footer.css'
 import './style/Modal.css'
+import './style/mobile.css'
 import App from './App.jsx'
 import AdminPanel from './components/AdminPanel.jsx'
 

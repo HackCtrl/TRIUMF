@@ -263,8 +263,10 @@ body {
 
 @media (max-width: 768px) {
   .directions { padding: 100px 20px; }
-  .directions__grid { grid-template-columns: var(--card-size); gap: 70px; }
+  .directions__grid { grid-template-columns: 1fr; gap: 50px; }
   .directions__title { font-size: 42px; }
+  .card { width: 100%; max-width: 300px; margin: 0 auto; }
+  .card__img { width: 100%; height: auto; aspect-ratio: 1; }
   .card__text { font-size: 24px; height: 49px; }
   .card { box-shadow: 0 0 20px rgba(255,255,255,0.35), 0 0 40px rgba(255,255,255,0.15); }
 }
@@ -305,14 +307,17 @@ body {
   flex-direction: column;
   align-items: center;
   transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-origin: center center;
 }
 
 
 .coaches-carousel__item {
   width: 360px;
   height: 360px;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   overflow: hidden;
+  position: relative; /* create a proper mask for absolutely positioned image */
   border: 5px solid rgba(255,255,255,0.9);
   box-shadow: 0 0 40px rgba(255,255,255,0.6), 0 0 80px rgba(255,255,255,0.3);
   pointer-events: none;
@@ -321,6 +326,8 @@ body {
 }
 
 .coaches-carousel__photo {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -427,7 +434,8 @@ body {
   .coaches-carousel { height: 620px; }
   .coaches-carousel__wrapper,
   .coaches-carousel__item { width: 340px; height: 340px; }
-  .coaches-carousel__wrapper.center .coaches-carousel__item { transform: scale(1.25); }
+  /* Slightly smaller center scale on tablets to avoid excessive crop */
+  .coaches-carousel__wrapper.center .coaches-carousel__item { transform: scale(1.15); }
   .coaches-carousel__nav--prev { left: calc(50% - 380px); }
   .coaches-carousel__nav--next { right: calc(50% - 380px); }
 }
@@ -436,49 +444,160 @@ body {
   .coaches-carousel { height: 520px; }
   .coaches-carousel__wrapper,
   .coaches-carousel__item {
-    width: min(300px, 72vw);
-    height: min(300px, 72vw);
+    /* Slightly smaller circles for mobile to improve composition */
+    width: min(280px, 70vw);
+    height: auto; /* use pseudo-element to enforce square */
     border-radius: 50%;
   }
-  .coaches-carousel__wrapper.center .coaches-carousel__item { transform: scale(1.25); }
+  .coaches-carousel__item::before {
+    content: "";
+    display: block;
+    padding-top: 100%; /* enforce square box regardless of parent's constraints */
+  }
+  /* Reduce center zoom to keep faces visible */
+  .coaches-carousel__wrapper.center .coaches-carousel__item { transform: scale(1.15); }
   .coaches-carousel__name { font-size: 18px; margin-top: 16px; }
   .coaches-carousel__wrapper.center .coaches-carousel__name { font-size: 18px; margin-top: 20px; }
   .coaches-carousel__nav--prev { left: calc(50% - (min(320px, 78vw) + 28px)); }
   .coaches-carousel__nav--next { right: calc(50% - (min(320px, 78vw) + 28px)); }
   .coaches-carousel__nav { width: 56px; height: 56px; }
-  .coaches-carousel__photo { transform: scale(0.92); }
-  .coaches-carousel__wrapper.center .coaches-carousel__photo { transform: scale(1); }
+  /* Ensure image fills the circle and faces remain visible: cover + adjusted position */
+  .coaches-carousel__photo {
+    transform: scale(0.98);
+    object-fit: cover;
+    object-position: center 38%; /* bias image slightly upward to show face */
+  }
+  .coaches-carousel__wrapper.center .coaches-carousel__photo {
+    transform: scale(1.02);
+    object-position: center 32%;
+  }
 }
+
+/* New simple coaches list styles (horizontal snap) */
+.coaches-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.coaches-list {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 18px 6px;
+  align-items: center;
+}
+.coach-card {
+  scroll-snap-align: center;
+  flex: 0 0 auto;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  transition: transform 300ms ease, box-shadow 300ms ease;
+  cursor: pointer;
+}
+.coach-card.active { transform: scale(1.04); }
+.coach-photo-wrap {
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 5px solid rgba(255,255,255,0.9);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+  background: #000;
+}
+.coach-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.coach-name {
+  font-size: 18px;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-align: center;
+}
+.coaches-nav {
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .coaches-list { gap: 12px; padding: 12px 8px; }
+  .coach-card { width: min(78vw, 260px); }
+  .coach-name { font-size: 16px; }
+  .coaches-nav { width: 40px; height: 40px; }
+}
+
 
 @media (max-width: 480px) {
   .coaches-carousel { height: 480px; }
   .coaches-carousel__wrapper,
   .coaches-carousel__item {
-    width: min(240px, 82vw);
-    height: min(240px, 82vw);
+    width: min(230px, 84vw);
+    height: min(230px, 84vw);
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
   }
-  .coaches-carousel__wrapper.center .coaches-carousel__item { transform: scale(1.25); }
+  .coaches-carousel__wrapper.center .coaches-carousel__item { transform: scale(1.12); }
   .coaches-carousel__nav--prev { left: 16px; }
   .coaches-carousel__nav--next { right: 16px; }
-  .coaches-carousel__photo { transform: scale(0.9); }
-  .coaches-carousel__wrapper.center .coaches-carousel__photo { transform: scale(1); }
+  .coaches-carousel__photo {
+    transform: scale(0.96);
+    object-fit: cover;
+    object-position: center 36%;
+  }
+  .coaches-carousel__wrapper.center .coaches-carousel__photo {
+    transform: scale(1.01);
+    object-position: center 30%;
+  }
 }
 
 @media (max-width: 360px) {
   .coaches-carousel { height: 460px; }
   .coaches-carousel__wrapper,
   .coaches-carousel__item {
-    width: min(200px, 88vw);
-    height: min(200px, 88vw);
+    width: min(230px, 84vw);
+    height: auto;
     border-radius: 50%;
+    border-radius: 50%;
+  .coaches-carousel__item::before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
   }
   .coaches-carousel__nav--prev { left: 12px; }
   .coaches-carousel__nav--next { right: 12px; }
   .coaches-carousel__nav { width: 54px; height: 54px; }
-  .coaches-carousel__photo { transform: scale(0.88); }
-  .coaches-carousel__wrapper.center .coaches-carousel__photo { transform: scale(1); }
+  .coaches-carousel__photo {
+    transform: scale(0.95);
+    object-fit: cover;
+    object-position: center 36%;
+  }
+  .coaches-carousel__wrapper.center .coaches-carousel__photo {
+    transform: scale(1.0);
+    object-position: center 28%;
+  }
 }
+
+/* mobile overrides are imported from JS to satisfy PostCSS import order */
 
 @media only screen 
   and (min-device-width: 768px) 
@@ -495,6 +614,44 @@ body {
   .coaches-carousel__nav--next { right: calc(50% - 320px); }
   .coaches-carousel__nav { width: 90px; height: 90px; }
   .coaches-carousel__arrow-icon { width: 64px; height: 64px; }
+}
+
+/* Strong mobile overrides: force square avatar box to avoid ovals on some devices/browsers */
+@media (max-width: 768px) {
+  .coaches-carousel__item {
+    width: min(280px, 70vw) !important;
+    height: min(280px, 70vw) !important;
+    aspect-ratio: 1 / 1 !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+  .coaches-carousel__item::before { display: none !important; }
+  .coaches-carousel__photo {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center 34% !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .coaches-carousel__item {
+    width: min(230px, 84vw) !important;
+    height: min(230px, 84vw) !important;
+  }
+  .coaches-carousel__photo { object-position: center 32% !important; }
+}
+
+@media (max-width: 360px) {
+  .coaches-carousel__item {
+    width: min(190px, 90vw) !important;
+    height: min(190px, 90vw) !important;
+  }
+  .coaches-carousel__photo { object-position: center 30% !important; }
 }
 
 
@@ -655,11 +812,6 @@ body {
   .prices {
     padding: 100px 20px;
   }
-  .prices__grid {
-    grid-template-columns: 1fr;
-    gap: 80px;
-    padding: 0 20px;
-  }
   .prices__card-content {
     padding: 28px 22px;
   }
@@ -669,6 +821,16 @@ body {
 
   .prices__card {
     max-width: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .prices__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .prices__card {
+    max-width: 100%;
   }
 }
 
@@ -819,6 +981,10 @@ body {
 @media (max-width: 768px) {
   .schedule {
     padding: 0px 20px;
+  }
+  .schedule__wrapper {
+    padding: 0 20px;
+    gap: 60px;
   }
   .schedule__title {
     font-size: 42px;

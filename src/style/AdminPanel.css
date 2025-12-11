@@ -98,12 +98,18 @@
 .admin-table-wrap { overflow:auto; }
 
 @media (max-width: 768px) {
-  .admin-card { width: 95%; padding: 14px; }
+  .admin-root { padding: 12px 10px; }
+  .admin-card { width: 100%; max-width: 100%; padding: 14px; box-sizing: border-box; }
   .admin-header { flex-direction: column; align-items: flex-start; gap:8px }
   .admin-table { width: 100%; border: none; }
   .admin-table thead { display: none; }
   .admin-table tbody tr { display: block; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); margin-bottom: 12px; padding: 12px; border-radius: 10px; }
-  .admin-table tbody tr td { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: none; }
+  .admin-table tbody tr td { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: none; gap:8px }
+  .admin-table tbody tr td { flex-wrap: wrap; }
+  .admin-table tbody tr td > * { min-width: 0; }
+  /* stack label and value vertically to avoid cramped layout on narrow screens */
+  .admin-table tbody tr td { flex-direction: column; align-items: flex-start; }
+  .admin-table tbody tr td > .btn { margin-top: 8px; }
   .admin-table tbody tr td:first-child { font-weight:800; }
   .admin-badge { padding:4px 8px; font-size:13px }
   .btn { padding:8px 10px; font-size:14px }
