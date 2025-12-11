@@ -424,32 +424,48 @@ body {
 }
 
 @media (max-width: 768px) {
-  .coaches-carousel { height: 480px; }
+  .coaches-carousel { height: 560px; }
   .coaches-carousel__wrapper,
-  .coaches-carousel__item { width: 200px; height: 200px; }
-  .coaches-carousel__wrapper.center .coaches-carousel__item { transform: scale(1.05); }
-  .coaches-carousel__name { font-size: 16px; margin-top: 20px; }
-  .coaches-carousel__wrapper.center .coaches-carousel__name { font-size: 16px; margin-top: 25px; }
-  .coaches-carousel__nav--prev { left: 70px; }
-  .coaches-carousel__nav--next { right: 70px; }
-  .coaches-carousel__nav { width: 50px; height: 50px; }
+  .coaches-carousel__item {
+    width: min(360px, 78vw);
+    height: auto;
+    aspect-ratio: 1.6 / 1;
+    border-radius: 50% / 38%;
+  }
+  .coaches-carousel__wrapper.center .coaches-carousel__item { transform: scale(1.12); }
+  .coaches-carousel__name { font-size: 20px; margin-top: 18px; }
+  .coaches-carousel__wrapper.center .coaches-carousel__name { font-size: 20px; margin-top: 22px; }
+  .coaches-carousel__nav--prev { left: calc(50% - (min(360px, 78vw) + 24px)); }
+  .coaches-carousel__nav--next { right: calc(50% - (min(360px, 78vw) + 24px)); }
+  .coaches-carousel__nav { width: 60px; height: 60px; }
 }
 
 @media (max-width: 480px) {
-  .coaches-carousel { height: 420px; }
+  .coaches-carousel { height: 520px; }
   .coaches-carousel__wrapper,
-  .coaches-carousel__item { width: 180px; height: 180px; }
-  .coaches-carousel__nav--prev { left: 12px; }
-  .coaches-carousel__nav--next { right: 12px; }
+  .coaches-carousel__item {
+    width: min(320px, 86vw);
+    height: auto;
+    aspect-ratio: 1.6 / 1;
+    border-radius: 50% / 38%;
+  }
+  .coaches-carousel__wrapper.center .coaches-carousel__item { transform: scale(1.12); }
+  .coaches-carousel__nav--prev { left: 16px; }
+  .coaches-carousel__nav--next { right: 16px; }
 }
 
 @media (max-width: 360px) {
-  .coaches-carousel { height: 400px; }
+  .coaches-carousel { height: 500px; }
   .coaches-carousel__wrapper,
-  .coaches-carousel__item { width: 160px; height: 160px; }
-  .coaches-carousel__nav--prev { left: 17px; }
-  .coaches-carousel__nav--next { right: 17px; }
-  .coaches-carousel__nav { width: 50px; height: 50px; }
+  .coaches-carousel__item {
+    width: min(280px, 90vw);
+    height: auto;
+    aspect-ratio: 1.6 / 1;
+    border-radius: 50% / 40%;
+  }
+  .coaches-carousel__nav--prev { left: 12px; }
+  .coaches-carousel__nav--next { right: 12px; }
+  .coaches-carousel__nav { width: 54px; height: 54px; }
 }
 
 @media only screen 
