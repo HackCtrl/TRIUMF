@@ -10,7 +10,7 @@ export default async function handler(req, res) {
 
   if (req.method === 'POST') {
     // public endpoint to create application
-    const { name, username, phone, direction } = req.body || {};
+    const { name, phone, direction } = req.body || {};
     if (!name || !phone) return res.status(400).json({ error: 'name and phone required' });
 
     try {
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
           Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
           Prefer: 'return=representation'
         },
-        body: JSON.stringify([{ name, username, phone, direction, status: 'new' }])
+        body: JSON.stringify([{ name, phone, direction, status: 'new' }])
       });
 
       const data = await resp.json();
@@ -50,29 +50,6 @@ export default async function handler(req, res) {
       const data = await resp.json();
       if (!resp.ok) return res.status(resp.status).json({ error: data });
       return res.status(200).json(data);
-    } catch (err) {
-      console.error(err);
-      return res.status(500).json({ error: 'server error' });
-    }
-  }
-
-  if (req.method === 'DELETE') {
-    // admin only: delete all applications
-    const pass = req.headers['x-admin-pass'];
-    if (!pass || pass !== ADMIN_PASS) return res.status(401).json({ error: 'unauthorized' });
-
-    try {
-      const resp = await fetch(`${SUPABASE_URL}/rest/v1/applications`, {
-        method: 'DELETE',
-        headers: {
-          apikey: SUPABASE_SERVICE_ROLE_KEY,
-          Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
-          Prefer: 'return=representation'
-        }
-      });
-      const data = await resp.json().catch(() => null);
-      if (!resp.ok) return res.status(resp.status).json({ error: data });
-      return res.status(200).json({ deleted: true, data });
     } catch (err) {
       console.error(err);
       return res.status(500).json({ error: 'server error' });

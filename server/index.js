@@ -28,14 +28,13 @@ async function writeDB(data) {
 }
 
 app.post('/api/applications', async (req, res) => {
-  const { name, username, phone, direction } = req.body || {};
+  const { name, phone, direction } = req.body || {};
   if (!name || !phone) return res.status(400).json({ error: 'name and phone required' });
 
   const db = await readDB();
   const entry = {
     id: Date.now().toString(),
     name,
-    username: username || '',
     phone,
     direction: direction || '',
     status: 'new',
@@ -66,21 +65,6 @@ app.patch('/api/applications/:id', checkAdmin, async (req, res) => {
   db[idx] = { ...db[idx], ...updates };
   await writeDB(db);
   res.json(db[idx]);
-});
-
-app.delete('/api/applications/:id', checkAdmin, async (req, res) => {
-  const { id } = req.params;
-  const db = await readDB();
-  const idx = db.findIndex((x) => x.id === id);
-  if (idx === -1) return res.status(404).json({ error: 'not found' });
-  const removed = db.splice(idx, 1)[0];
-  await writeDB(db);
-  res.json({ deleted: true, entry: removed });
-});
-
-app.delete('/api/applications', checkAdmin, async (req, res) => {
-  await writeDB([]);
-  res.json({ deleted: true });
 });
 
 const port = process.env.PORT || 3001;
