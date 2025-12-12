@@ -152,17 +152,7 @@ export default function AdminPanel({ onClose = null }) {
     </div>
   );
 
-  // If AdminPanel is rendered as modal (onClose prop passed from parent), add close control
-  if (onClose) {
-    return (
-      <div>
-        <div style={{textAlign:'right', marginBottom:8}}>
-          <button className="btn" onClick={onClose}>Закрыть</button>
-        </div>
-        {content}
-      </div>
-    );
-  }
-
+  // When rendered inside overlay, parent provides a fullscreen close button.
+  // Return content directly so overlay's close control is used (avoids duplicate buttons).
   return content;
 }

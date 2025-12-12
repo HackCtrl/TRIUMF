@@ -55,8 +55,8 @@ function Schedule() {
             <div className="schedule__content">
               <ul>
                 <li><h3>Детская с 8 до 15</h3></li>
-                <li><p>Вт с 16:30 до 18:00</p></li>
-                <li><p>Чт с 16:30 до 18:00</p></li>
+                <li><p>Вт с 16:30</p></li>
+                <li><p>Чт с 16:30</p></li>
               </ul>
               <ul className="schedule__adult">
                 <li><h3>Взрослая 15+</h3></li>

@@ -6,13 +6,12 @@ function Prices() {
 
         <div className="prices__grid">
           <div className="prices__card">
-            <img src="/box.png" alt="Бокс/Кикбоксинг" className="prices__card-img" />
+            <img src="/box.png" alt="Абонемент" className="prices__card-img" />
             <div className="prices__card-content">
-              <h3>Бокс / Кикбоксинг</h3>
+              <h3>Абонемент</h3>
               <div className="gradient-line"></div>
               <ul>
                 <li>Абонемент на месяц</li>
-                <li>12 тренировок</li>
                 <li className="price">5 000 ₽</li>
               </ul>
             </div>

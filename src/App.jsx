@@ -26,8 +26,9 @@ function App() {
       <AdminLauncher onOpen={() => setAdminOpen(true)} />
 
       {adminOpen && (
-        <div className="admin-modal-overlay" onClick={() => setAdminOpen(false)}>
-          <div onClick={(e) => e.stopPropagation()}>
+        <div className="admin-fullscreen-overlay">
+          <div className="admin-fullscreen-inner">
+            <button className="admin-fullscreen-close" onClick={() => setAdminOpen(false)} aria-label="Закрыть">✕</button>
             <AdminPanel onClose={() => setAdminOpen(false)} />
           </div>
         </div>

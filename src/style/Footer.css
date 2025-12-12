@@ -1,58 +1,79 @@
 .footer {
   background: #000;
-  padding: 100px var(--section-padding-x) 60px;
+  padding: 80px var(--section-padding-x) 40px;
   margin-top: 100px;
 }
 
 .footer__inner {
-  max-width: 1600px;
+  max-width: 1400px;
   margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: start;
   gap: 60px;
 }
 
+/* Левая часть - Логотип */
 .footer__left {
-  flex: 1;
-  min-width: 280px;
+  display: flex;
+  flex-direction: column;
 }
 
-.footer__contacts {
-  list-style: none;
-  padding: 0;
+.footer__logo h3 {
+  font-size: 32px;
+  font-weight: 900;
+  color: white;
+  margin: 0 0 12px 0;
+  letter-spacing: 2px;
+}
+
+.footer__logo p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
   margin: 0;
-  font-size: 24px;
-  font-weight: 900;
-  line-height: 1.6;
-  color: white;
+  line-height: 1.4;
 }
 
-.footer__contacts li {
-  position: relative;
-  padding-left: 32px;
-  margin-bottom: 14px;
-}
-
-.footer__contacts li::before {
-  position: absolute;
-  left: 0;
-  color: white;
-  font-size: 36px;
-  font-weight: 900;
-  top: -8px;
-}
-
+/* Центральная часть - Меню и контакты */
 .footer__center {
-  flex: 2;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
 }
 
-.footer__nav {
+.footer__center-box {
   display: flex;
-  gap: 80px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer__phones {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+
+.footer__phone-link {
+  color: rgba(255,255,255,0.95);
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.footer__phone-link:hover {
+  color: #ff4444;
+  background: rgba(255,255,255,0.02);
+}
+
+.footer__nav ul {
+  display: flex;
+  gap: 60px;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -63,20 +84,108 @@
 .footer__nav a {
   color: white;
   text-decoration: none;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 600;
   text-transform: uppercase;
   transition: color 0.3s;
 }
 
 .footer__nav a:hover {
   color: #ff4444;
-  text-shadow: 0 0 15px rgba(255,68,68,0.6);
 }
 
+.footer__location {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.footer__contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-style: normal;
+}
+
+.footer__phone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer__phone a {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: color 0.3s;
+}
+
+.footer__phone a:hover {
+  color: #ff4444;
+}
+
+.footer__phone-icon {
+  font-size: 24px;
+}
+
+/* Правая часть - Соцсети и кнопка вверх */
 .footer__right {
-  flex: 1;
-  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 30px;
+}
+
+.footer__socials {
+  display: flex;
+  gap: 20px;
+}
+
+.footer__social-link {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: all 0.3s;
+}
+
+.footer__social-link:hover {
+  background: rgba(255, 68, 68, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(255, 68, 68, 0.3);
+}
+
+.footer__social-link svg {
+  width: 28px;
+  height: 28px;
+}
+
+.footer__scroll-top {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  transition: all 0.3s;
+}
+
+.footer__scroll-top:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
 }
 
 .button {
@@ -108,101 +217,155 @@
     linear-gradient(90deg, #ff4444, #4444ff);
 }
 
-.footer__copyright {
-  margin-top: 60px;
-  text-align: center;
-  font-size: 18px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.4);
-  letter-spacing: 1px;
-}
-
+/* Планшеты горизонтальные */
 @media only screen and (min-width: 768px) and (max-width: 1366px) and (orientation: landscape) {
   .footer__inner {
+    grid-template-columns: 1fr 2fr 1fr;
     gap: 40px;
   }
-  .footer__contacts {
-    font-size: 22px;
+  .footer__logo h3 {
+    font-size: 28px;
   }
-  .footer__nav {
-    gap: 50px;
+  .footer__nav ul {
+    gap: 40px;
   }
-  .footer__nav a {
-    font-size: 18px;
-  }
-  .button {
-    padding: 16px 11px;
-    font-size: 12px;
-  }
-}
-
-@media only screen and (min-width: 768px) and (max-width: 1366px) and (orientation: portrait) {
-  .footer__inner {
-    flex-direction: column;
-    text-align: center;
-    gap: 50px;
-  }
-  .footer__left,
-  .footer__right {
-    text-align: center;
-  }
-  .footer__contacts {
-    font-size: 26px;
-  }
-  .footer__nav {
-    gap: 60px;
-  }
-  .button {
-    padding: 16px 14px;
-    font-size: 13px;
-  }
-}
-
-@media (max-width: 992px) {
-  .footer__inner {
-    flex-direction: column;
-    text-align: center;
-    gap: 50px;
-  }
-  .footer__left,
-  .footer__right {
-    text-align: center;
-  }
-}
-
-@media (max-width: 768px) {
-  .footer {
-    padding: 80px 40px 60px;
-  }
-  .footer__contacts {
-    font-size: 22px;
-  }
-  .footer__nav a {
-    font-size: 18px;
-  }
-  .button {
-    padding: 16px 36px;
-    font-size: 18px;
-  }
-}
-
-@media (max-width: 480px) {
-  .footer__contacts {
-    font-size: 20px;
-  }
-  .footer__nav {
-    flex-direction: column;
-    gap: 30px;
-  }
-  .button {
-    padding: 14px 8px;
-    font-size: 12px;
-  }
-  .footer__copyright {
+  .footer__nav a,
+  .footer__location {
     font-size: 16px;
   }
+  .footer__phone a {
+    font-size: 18px;
+  }
 }
 
+/* Планшеты вертикальные */
+@media only screen and (min-width: 768px) and (max-width: 1366px) and (orientation: portrait) {
+  .footer__inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 50px;
+  }
+  .footer__left {
+    align-items: center;
+  }
+  .footer__right {
+    align-items: center;
+  }
+  .footer__nav ul {
+    gap: 50px;
+  }
+}
+
+/* Средние экраны */
+@media (max-width: 992px) {
+  .footer__inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 50px;
+  }
+  .footer__left {
+    align-items: center;
+  }
+  .footer__right {
+    align-items: center;
+  }
+}
+
+/* Мобильные устройства */
+@media (max-width: 768px) {
+  .footer {
+    padding: 60px 24px 40px;
+  }
+  .footer__inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .footer__left {
+    align-items: center;
+    text-align: center;
+  }
+  .footer__logo h3 {
+    font-size: 28px;
+  }
+  .footer__logo p {
+    font-size: 13px;
+  }
+  .footer__nav ul {
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+  }
+  .footer__nav a,
+  .footer__location {
+    font-size: 16px;
+  }
+  .footer__phone a {
+    font-size: 18px;
+  }
+  .footer__right {
+    align-items: center;
+  }
+  .footer__socials {
+    gap: 24px;
+  }
+  .footer__social-link {
+    width: 60px;
+    height: 60px;
+  }
+  .footer__social-link svg {
+    width: 32px;
+    height: 32px;
+  }
+  .footer__scroll-top {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* Очень маленькие экраны */
+@media (max-width: 480px) {
+  .footer {
+    padding: 50px 16px 30px;
+  }
+  .footer__inner {
+    gap: 32px;
+  }
+  .footer__logo h3 {
+    font-size: 24px;
+  }
+  .footer__logo p {
+    font-size: 12px;
+  }
+  .footer__nav ul {
+    gap: 20px;
+  }
+  .footer__nav a,
+  .footer__location {
+    font-size: 15px;
+  }
+  .footer__phone a {
+    font-size: 16px;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .footer__socials {
+    gap: 16px;
+  }
+  .footer__social-link {
+    width: 50px;
+    height: 50px;
+  }
+  .footer__social-link svg {
+    width: 26px;
+    height: 26px;
+  }
+  .footer__scroll-top {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* iPad Pro 11" */
 @media only screen 
   and (min-device-width: 820px) 
   and (max-device-width: 820px) 
@@ -211,9 +374,11 @@
   and (orientation: portrait)
   and (-webkit-min-device-pixel-ratio: 2) {
 
-  .button {
-    padding: 14px 14px ;   
-    font-size: 11px ;      
-    min-width: 169px ;
+  .footer__inner {
+    gap: 40px;
+  }
+  .footer__social-link {
+    width: 55px;
+    height: 55px;
   }
 }
